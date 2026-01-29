@@ -1,85 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>Calculator</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Калькулятор</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="calculator">
-        	<div class="buttons">
-        	    <button onclick="addToDisplay('7')">7</button>
-        	    <button onclick="addToDisplay('8')">8</button>
-        	    <button onclick="addToDisplay('9')">9</button>
-        	    <button onclick="addToDisplay('/')">/</button>
-        	    <button onclick="addToDisplay('4')">4</button>
-        	    <button onclick="addToDisplay('5')">5</button>
-        	    <button onclick="addToDisplay('6')">6</button>
-        	    <button onclick="addToDisplay('*')">×</button>
-        	    <button onclick="addToDisplay('1')">1</button>
-        	    <button onclick="addToDisplay('2')">2</button>
-        	    <button onclick="addToDisplay('3')">3</button>
-        	    <button onclick="addToDisplay('-')">-</button>
-        	    <button onclick="addToDisplay('0')">0</button>
-        	    <button onclick="addToDisplay('(')">(</button>
-        	    <button onclick="addToDisplay(')')">)</button>
-        	    <button onclick="addToDisplay('+')">+</button>
-        	    <button onclick="clearDisplay()">C</button>
-                <form action="work.php" method="post">
-                     <input type="text" class="display" id="display" name="expression" readonly>
-        	        <button type="submit" style="grid-column: span 3">=</button>
-                </form>
-       
-        	</div>
-        <div class="result" id="result"></div>
-    </div>
+<div id="calculator">
+  <input type="text" id="display" readonly>
+  <br>
+  <button onclick="append('7')">7</button>
+  <button onclick="append('8')">8</button>
+  <button onclick="append('9')">9</button>
+  <button onclick="append('/')">/</button>
+  <br>
+  <button onclick="append('4')">4</button>
+  <button onclick="append('5')">5</button>
+  <button onclick="append('6')">6</button>
+  <button onclick="append('*')">*</button>
+  <br>
+  <button onclick="append('1')">1</button>
+  <button onclick="append('2')">2</button>
+  <button onclick="append('3')">3</button>
+  <button onclick="append('-')">-</button>
+  <br>
+  <button onclick="append('0')">0</button>
+  <button onclick="append('(')">(</button>
+  <button onclick="append(')')">)</button>
+  <button onclick="append('+')">+</button>
+  <br>
+  <button onclick="clearDisplay()">C</button>
+  <button onclick="calculate()">=</button>
+</div>
 
-    <script>
-        let display = document.getElementById('display');
-        let resultDiv = document.getElementById('result');
-        
-        function addToDisplay(value) {
-            display.value += value;
-        }
+<script>
+function append(char) {
+    document.getElementById('display').value += char;
+}
 
-        function clearDisplay() {
-            display.value = '';
-            resultDiv.innerHTML = '';
-        }
+function clearDisplay() {
+    document.getElementById('display').value = '';
+}
 
-        function calculate() {
-            let expression = display.value.trim();
-            if (!expression) {
-                resultDiv.innerHTML = '<span class="error">Enter an expression</span>';
-                return;
-            }
-            
-            fetch('work.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'expression=' + encodeURIComponent(expression)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Server error: ' + response.status);
-                }
-                return response.text();
-            })
-            .then(data => {
-                console.log('Server response:', data); // Для отладки
-                if (data.startsWith('Error:')) {
-                    window.location.href = 'result.php?error=' + encodeURIComponent(data.replace('Error: ', ''));
-                } else {
-                    window.location.href = 'result.php?result=' + encodeURIComponent(data);
-                }
-            })
-            .catch(error => {
-                resultDiv.innerHTML = '<span class="error">Error: ' + error.message + '</span>';
-                console.error('Fetch error:', error); // Для отладки
-            });
-        }
-    </script>
+function calculate() {
+    const expression = document.getElementById('display').value;
+    fetch('calc.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'expr=' + encodeURIComponent(expression)
+    })
+    .then(response => response.text())
+    
+    .then(result => {
+        console.log(result);
+        document.getElementById('display').value = result;
+    });
+}
+</script>
 </body>
 </html>

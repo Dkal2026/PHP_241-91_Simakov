@@ -1,5 +1,3 @@
 <?php
-    $arr = file('test.txt', FILE_IGNORE_NEW_LINES);
-    $summ = array_sum($arr);
-    file_put_contents('test.txt', $summ, FILE_APPEND | LOCK_EX);
-?>  
+    print_r(preg_replace('/([a-z1-9])\1/', '!', 'aae xxz 33a'));
+?>
