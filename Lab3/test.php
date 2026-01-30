@@ -1,3 +1,3 @@
 <?php
-    print_r(preg_replace('/([a-z1-9])\1/', '!', 'aae xxz 33a'));
+    print_r(preg_replace( '~([a-z])(\\\\)\1([a-z])~', '!', 'a\a a\a a\\\a'));
 ?>
