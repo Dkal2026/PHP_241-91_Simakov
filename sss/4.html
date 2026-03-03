@@ -23,7 +23,7 @@
 
     <meta name="yandex-verification" content="173d7b4a2d4a00fa" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Universe&#127920</title>
+    <title>О Linux</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
@@ -37,9 +37,8 @@
     gtag('config', 'G-8TPTLW3S5D');
     </script>
 
-
     <meta name="yandex-verification" content="fae6bab9fa595c4b" />
-    <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
@@ -61,7 +60,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Pacifico&family=Rubik+Wet+Paint&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
-    <meta name = "descriiption" content="О дистрибутивах Unix систем.">
+    <meta name = "descriiption" content="О Linux системак что это и с чем едят.">
     <meta name = "descriiption" content="город Москва.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow">
@@ -136,7 +135,6 @@
         
     }
 </script>
- 
 
 </head>
 <body>
@@ -167,62 +165,76 @@
             </button>
         </nav>
 
-        <!-- Шапка с героем -->
-        <header class="hero-section" id="home">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <div class="hero-badge">
-                        <span class="badge"><i class="fas fa-code"></i> Open Source</span>
-                        <span class="badge"><i class="fas fa-shield-alt"></i> Безопасность</span>
-                        <span class="badge"><i class="fas fa-rocket"></i> Производительность</span>
+        <!-- Основной контент -->
+        <main class="main-content">
+            <!-- О Linux -->
+            <section class="section" id="about">
+                <div class="section-header">
+                    <h2 class="section-title"><i class="fas fa-history"></i> История и философия</h2>
+                    <p class="section-subtitle">От скромного проекта к мировой технологической революции</p>
+                </div>
+                <div class="about-content">
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3>Линус Торвальдс</h3>
+                        <p>Финский программист, создавший ядро Linux в 1991 году как хобби-проект во время учебы в университете Хельсинки.</p>
                     </div>
-                    <h1 class="hero-title">
-                        <span class="title-gradient">Операционная система</span>
-                        <span class="title-main">Linux</span>
-                    </h1>
-                    <p class="hero-subtitle">Свободная, мощная и универсальная платформа для всех ваших потребностей</p>
-                    <div class="hero-stats">
-                        <div class="stat">
-                            <div class="stat-number" data-count="100">100</div>
-                            <div class="stat-label">Суперкомпьютеров</div>
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <i class="fab fa-github"></i>
                         </div>
-                        <div class="stat">
-                            <div class="stat-number" data-count="1991">1991</div>
-                            <div class="stat-label">Год создания</div>
+                        <h3>Открытый исходный код</h3>
+                        <p>Философия свободного распространения и совместной разработки, которая изменила мир программного обеспечения.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <i class="fas fa-globe"></i>
                         </div>
-                        <div class="stat">
-                            <div class="stat-number" data-count="3000">3000</div>
-                            <div class="stat-label">Дистрибутивов</div>
+                        <h3>Глобальное сообщество</h3>
+                        <p>Тысячи разработчиков по всему миру вносят свой вклад в развитие экосистемы Linux каждый день.</p>
+                    </div>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">1991</div>
+                        <div class="timeline-content">
+                            <h4>Рождение Linux</h4>
+                            <p>Линус Торвальдс анонсирует создание ядра Linux в новостной группе comp.os.minix</p>
                         </div>
-                        <div class="stat">
-                            <div class="stat-number" data-count="90">90</div>
-                            <div class="stat-label">Серверов</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">1993</div>
+                        <div class="timeline-content">
+                            <h4>Debian</h4>
+                            <p>Создание одного из старейших и наиболее уважаемых дистрибутивов Linux</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2004</div>
+                        <div class="timeline-content">
+                            <h4>Ubuntu</h4>
+                            <p>Выпуск первого релиза Ubuntu, который сделал Linux доступным для массового пользователя</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2008</div>
+                        <div class="timeline-content">
+                            <h4>Android</h4>
+                            <p>Запуск первой версии Android, основанной на ядре Linux</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Сегодня</div>
+                        <div class="timeline-content">
+                            <h4>Доминирование</h4>
+                            <p>Linux работает на 100% суперкомпьютеров, 90% облачных серверов и миллиардах Android-устройств</p>
                         </div>
                     </div>
                 </div>
-                <div class="hero-visual">
-                    <div class="terminal-window">
-                        <div class="terminal-header">
-                            <div class="terminal-buttons">
-                                <span class="btn red"></span>
-                                <span class="btn yellow"></span>
-                                <span class="btn green"></span>
-                            </div>
-                            <div class="terminal-title">linux@universe:~</div>
-                        </div>
-                        <div class="terminal-body">
-                            <div class="terminal-line"><span class="prompt">$</span> whoami</div>
-                            <div class="terminal-line">linux_user</div>
-                            <div class="terminal-line"><span class="prompt">$</span> date</div>
-                            <div class="terminal-line">Пн Дек 11 14:30:00 UTC 2023</div>
-                            <div class="terminal-line"><span class="prompt">$</span> echo "Добро пожаловать в Linux Universe!"</div>
-                            <div class="terminal-line blink">Добро пожаловать в Linux Universe!</div>
-                            <div class="terminal-line"><span class="prompt">$</span> <span class="cursor">▋</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
+            </section>
+        </main>
 
         <!-- Подвал -->
         <footer class="footer">

@@ -1,3 +1,4 @@
 <?php
-    print_r(preg_replace( '~([a-z])(\\\\)\1([a-z])~', '!', 'a\a a\a a\\\a'));
+    $text = 'aa a1a a22a a333a a4444a a55555a aba aca';
+    echo preg_replace( '/a\d*a/', '!',$text);
 ?>

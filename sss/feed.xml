@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Linux Universe</title>
+        <link>https://sss-snowy-five.vercel.app/index.html</link>
+        <description>Linux Universe | Полное руководство</description>
+        <language>ru</language>
+        <lastBuildDate>Fri, 27 Feb 2026 9:20:00 +0300</lastBuildDate>   
+
+        <item>
+            <title>Linux Universe</title>
+            <link>https://sss-snowy-five.vercel.app/index.html</link>
+            <description>Про линукс</description>
+            <pubDate>Fri, 27 Feb 2026 9:20:00 +0300</pubDate>
+            <guid>https://sss-snowy-five.vercel.app/index.html</guid>
+        </item>
+
+        <item>
+            <title>О Linux</title>
+            <link>https://sss-snowy-five.vercel.app/index.html</link>
+            <description>О Linux</description>
+            <pubDate>Fri, 27 Feb 2026 9:20:00 +0300</pubDate>
+            <guid>https://sss-snowy-five.vercel.app/4.html</guid>
+        </item>
+
+        <item>
+            <title>Дистрибутивы</title>
+            <link>https://sss-snowy-five.vercel.app/index.html</link>
+            <description>Дистрибутивы</description>
+            <pubDate>Fri, 27 Feb 2026 9:20:00 +0300</pubDate>
+            <guid>https://sss-snowy-five.vercel.app/5.html</guid>
+        </item>
+
+        <item>
+            <title>Преимущества линукс</title>
+            <link>https://sss-snowy-five.vercel.app/index.html</link>
+            <description>Преимущества линукс</description>
+            <pubDate>Fri, 27 Feb 2026 9:20:00 +0300</pubDate>
+            <guid>https://sss-snowy-five.vercel.app/2.html</guid>
+        </item>
+
+        <item>
+            <title>Сообщество</title>
+            <link>https://sss-snowy-five.vercel.app/index.html</link>
+            <description>Сообщество</description>
+            <pubDate>Fri, 27 Feb 2026 9:20:00 +0300</pubDate>
+            <guid>https://sss-snowy-five.vercel.app/3.html</guid>
+        </item>
+    </channel>
+</rss>
