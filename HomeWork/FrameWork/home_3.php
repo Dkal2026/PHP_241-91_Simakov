@@ -49,11 +49,12 @@
     {
         if($research instanceof CalcSquare)//!<- проверяет подписан ли класс на этот интерфейс.
         {
+            echo get_class($research);
             echo $research->calculateSquare().'<br>';
         }
         else{
-            echo "This class not intance calculateSquare <br>";
+            echo "Объект класса".get_class($research)." не реализует интерфейс CalculateSquare <br>";
         }
         
     }
-?>
+?>  
