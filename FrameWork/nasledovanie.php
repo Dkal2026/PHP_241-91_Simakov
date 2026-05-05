@@ -11,7 +11,7 @@
         }
     }
 
-    class Lesson extends Post
+    class Lesson extends Post//?<- метод наследования `extends,
     {
         protected $homeWork;
         public function __construct($title, $text, $homeWork)
