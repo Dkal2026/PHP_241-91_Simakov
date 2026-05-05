@@ -1,0 +1,34 @@
+<?php
+    class Post
+    {
+        protected $title;
+        protected $text;
+
+        public function __construct($title, $text)
+        {
+            $this->title = $title;
+            $this->text = $text;
+        }
+    }
+
+    class Lesson extends Post
+    {
+        protected $homeWork;
+        public function __construct($title, $text, $homeWork)
+        {
+            parent::__construct($title, $text);
+            $this->homeWork = $homeWork;
+        }
+        public function getInfo()
+        {
+            echo $this->title;
+        }
+    }
+
+
+    $post = new Post("as", "sas");
+    $lesson = new Lesson("New Lesson", "OOP", "OOP");
+    // var_dump($post);
+    var_dump($lesson);
+    $lesson->getInfo();
+?>

@@ -8,8 +8,8 @@
                 if($_POST["password1"] == $_POST["password"]){
                     $sql = "INSERT INTO `users`( `login`, `password`, `email`, `role`) VALUES 
                         ('".$_POST['login']."',
-                         PASSWORD('".$_POST['password']."'),
-                         '".$_POST['email']."', 'read')";   
+                        PASSWORD('".$_POST['password']."'),
+                        '".$_POST['email']."', 'read')";   
                 var_dump($sql);
                 $result = mysqli_query($mysqli, $sql);
                 if(mysqli_errno($mysqli)) echo mysqli_error();
@@ -23,13 +23,13 @@
     // Добавления записи в таблицу 'a'
     elseif(isset($_POST["create"])){
         $sql = "INSERT INTO `a`(`First name`, `Name`, `Last name`, `Phone`, `email`, `Adres`, `User_id`) VALUES
-                 ('".$_POST['Firstname']."',
-                 '".$_POST['name']."',
-                 '".$_POST['Lastname']."',
-                 '".$_POST['phone']."',
-                 '".$_POST['email']."',
-                 '".$_POST['addres']."',
-                 '".$_SESSION['userId']."')";
+                ('".$_POST['Firstname']."',
+                '".$_POST['name']."',
+                '".$_POST['Lastname']."',
+                '".$_POST['phone']."',
+                '".$_POST['email']."',
+                '".$_POST['addres']."',
+                '".$_SESSION['userId']."')";
         $result = mysqli_query($mysqli, $sql);
         if(mysqli_errno($mysqli)) echo mysqli_error();
         header('Location: http://localhost/Simakov/Practica/content.php');
@@ -92,9 +92,9 @@
     // Коментраии запись в таблицу coments
     elseif(isset($_POST["coments"])){
         $sql = "INSERT INTO `coments`(`comment`, `user_id`, `article_id`) VALUES
-                 ('".$_POST['coment']."',
-                 '".$_SESSION['userId']."',
-                 '".$_POST['id']."')";
+                ('".$_POST['coment']."',
+                '".$_SESSION['userId']."',
+                '".$_POST['id']."')";
         $result = mysqli_query($mysqli, $sql);
         if(mysqli_errno($mysqli)) echo mysqli_error();
         header('Location: cards.php?id='.$_POST['id'].'');
