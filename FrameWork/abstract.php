@@ -20,3 +20,4 @@
     }
     $a = new ClassA("Meow");
     $a->printValue();
+?>
