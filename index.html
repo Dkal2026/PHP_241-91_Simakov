@@ -1,407 +1,180 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Satisfactory · Factory Cartographer</title>
-    <!-- Подключаем шрифт, похожий на интерфейс игры (дизель-панк/индустриальный) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <title>Storage Hub</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            background-color: #0b0f0b;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(80, 100, 50, 0.15) 0%, transparent 30%),
-                repeating-linear-gradient(45deg, rgba(40, 50, 20, 0.2) 0px, rgba(40, 50, 20, 0.2) 2px, transparent 2px, transparent 8px);
-            font-family: 'Barlow Condensed', sans-serif;
-            color: #d1d9c9;
-            line-height: 1.5;
+            background: #0f172a; /* Глубокий темный цвет */
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
             min-height: 100vh;
-            padding: 2rem 1rem;
+            padding: 40px;
         }
 
-        /* Контейнер в стиле "металлический щит" */
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: rgba(10, 18, 10, 0.7);
-            backdrop-filter: blur(3px);
-            border: 2px solid #7f8c6b;
-            box-shadow: 0 0 0 4px rgba(30, 40, 20, 0.8), 0 0 30px #2a3a1e;
-            padding: 2rem 2.5rem;
-            border-radius: 40px 12px 40px 12px;
-            position: relative;
+            width: 100%;
+            max-width: 1100px;
         }
 
-        /* Имитация заклёпок по углам */
-        .container::before {
-            content: '';
-            position: absolute;
-            top: -10px; left: -10px;
-            width: 30px; height: 30px;
-            border-top: 4px solid #b5c8a3;
-            border-left: 4px solid #b5c8a3;
-            border-radius: 20px 0 0 0;
-        }
-        .container::after {
-            content: '';
-            position: absolute;
-            bottom: -10px; right: -10px;
-            width: 30px; height: 30px;
-            border-bottom: 4px solid #b5c8a3;
-            border-right: 4px solid #b5c8a3;
-            border-radius: 0 0 20px 0;
+        header {
+            margin-bottom: 40px;
+            border-left: 4px solid #38bdf8;
+            padding-left: 20px;
         }
 
-        /* Верхний бар с предупреждением (как в игре) */
-        .warning-strip {
-            background: #271e0e;
-            border-left: 8px solid #f5a623;
-            padding: 0.8rem 1.5rem;
-            margin-bottom: 2.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            border-radius: 0 30px 0 30px;
-            box-shadow: 0 0 15px #ffcc0066;
-            font-family: 'Roboto Mono', monospace;
-            text-transform: uppercase;
-            color: #ffdb8e;
-            letter-spacing: 2px;
-        }
+        header h1 { font-size: 2rem; letter-spacing: -1px; }
+        header p { color: #94a3b8; margin-top: 5px; }
 
-        .warning-strip .icon {
-            font-size: 2rem;
-        }
-
-        h1, h2, h3 {
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        h1 {
-            font-size: 4.5rem;
-            line-height: 1;
-            color: #ead88f;
-            text-shadow: 4px 4px 0 #3a4a1e, 8px 8px 0 #1a2a0a;
-            margin-bottom: 0.25rem;
-        }
-
-        h2 {
-            font-size: 2.2rem;
-            border-bottom: 3px dashed #7d9745;
-            padding-bottom: 0.5rem;
-            margin: 2.5rem 0 1.5rem 0;
-            display: inline-block;
-            color: #cfdeae;
-        }
-
-        h3 {
-            font-size: 1.8rem;
-            color: #bad876;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Меню навигации (инвентарь) */
-        .nav-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem 1.5rem;
-            margin: 2rem 0 1.5rem;
-            padding: 1rem 0;
-            border-top: 2px solid #5c6b48;
-            border-bottom: 2px solid #5c6b48;
-        }
-
-        .nav-links a {
-            font-family: 'Roboto Mono', monospace;
-            color: #d3e5b3;
-            text-decoration: none;
-            font-size: 1.3rem;
-            font-weight: 600;
-            padding: 0.3rem 0.8rem;
-            border: 1px solid transparent;
-            transition: 0.2s;
-        }
-
-        .nav-links a:hover {
-            border-color: #f5e56b;
-            color: #fcf5b0;
-            background: #2f3d1f;
-            border-radius: 8px;
-        }
-
-        /* карточки особенностей (сетка как конвейер) */
-        .feature-grid {
+        .folder-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.8rem;
-            margin: 2rem 0;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
         }
 
-        .feature-card {
-            background: #192013;
-            border: 2px solid #62734a;
-            border-radius: 30px 8px 30px 8px;
-            padding: 1.8rem 1.5rem;
-            transition: all 0.15s ease;
-            box-shadow: inset 0 0 20px #00000066, 0 8px 0 #2a3f1e;
+        .folder-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 25px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            backdrop-filter: blur(10px);
         }
 
-        .feature-card:hover {
+        .folder-card:hover {
+            background: rgba(56, 189, 248, 0.1);
+            border-color: #38bdf8;
             transform: translateY(-5px);
-            border-color: #c3da94;
-            box-shadow: inset 0 0 20px #2f4520, 0 8px 0 #4f6a3a;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .feature-card .card-icon {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
+        .icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
         }
 
-        .feature-card p {
-            font-size: 1.2rem;
-            font-family: 'Roboto Mono', monospace;
-            color: #b6c4a3;
-        }
-
-        /* Таблица / список как план строительства */
-        .specs-block {
-            background: #0f130c;
-            border: 2px solid #6b7c58;
-            padding: 1.8rem 2rem;
-            border-radius: 40px 8px 40px 8px;
-            margin: 2rem 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: space-around;
-        }
-
-        .spec-item {
-            text-align: center;
-        }
-
-        .spec-item .value {
-            font-size: 3rem;
-            font-weight: 700;
-            color: #ffe484;
-            line-height: 1.2;
-            text-shadow: 0 0 10px #b1d630;
-        }
-
-        .spec-item .label {
-            font-family: 'Roboto Mono', monospace;
-            font-size: 1rem;
-            text-transform: uppercase;
-            color: #96a882;
-        }
-
-        /* Цитата из мира игры */
-        .quote-block {
-            background: #1c2a12;
-            padding: 2rem;
-            border-left: 12px solid #e3b35c;
-            font-style: normal;
-            font-size: 1.6rem;
+        .folder-name {
             font-weight: 600;
-            border-radius: 0 60px 0 60px;
-            margin: 2.5rem 0;
-            box-shadow: 0 0 30px #384e20;
-            color: #efdea3;
-        }
-
-        .quote-block span {
-            font-family: 'Roboto Mono', monospace;
-            font-size: 1.2rem;
-            color: #bacc9b;
-            display: block;
-            margin-top: 0.5rem;
-        }
-
-        /* Кнопка "энергия" */
-        .button {
-            background: #4f6b2b;
-            border: none;
-            border-bottom: 6px solid #273b16;
-            color: #fafad2;
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            padding: 1rem 2.5rem;
-            border-radius: 60px 12px 60px 12px;
-            cursor: default;
-            transition: 0.08s linear;
-            letter-spacing: 2px;
-            box-shadow: 0 0 20px #b1d63066;
-            display: inline-block;
-        }
-
-        .button:active {
-            transform: translateY(4px);
-            border-bottom-width: 2px;
-        }
-
-        footer {
-            margin-top: 3rem;
+            font-size: 1.1rem;
             text-align: center;
-            font-family: 'Roboto Mono', monospace;
-            color: #77855e;
-            border-top: 2px dashed #5f7148;
-            padding-top: 1.5rem;
         }
 
-        /* Маленькие детали — счётчики как в игре */
-        .counter-panel {
-            display: flex;
-            gap: 2rem;
-            justify-content: flex-end;
-            font-family: 'Roboto Mono', monospace;
-            background: #151f10;
-            padding: 0.5rem 1.5rem;
-            border-radius: 30px;
-            border: 1px solid #859f62;
+        .file-count {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        .counter-panel div {
-            color: #c7f18b;
-        }
+
+        /* Цвета иконок для красоты */
+        .blue { color: #38bdf8; }
+        .amber { color: #fbbf24; }
+        .rose { color: #fb7185; }
+        .emerald { color: #34d399; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Панель с FICSIT Inc. напоминанием -->
-        <div class="warning-strip">
-            <span class="icon">⚠️</span>
-            <span>FICSIT INC. одобряет: эффективность прежде всего. Любые потери ресурсов будут засчитаны в ваш личный файл.</span>
-        </div>
 
-        <!-- Главный заголовок и подпись -->
-        <h1>SATISFACTORY</h1>
-        <div class="counter-panel">
-            <div>🔧 постройки: 1247</div>
-            <div>⚡ потребление: 127.8 ГВт</div>
-            <div>📦 грузопоток: 7800/мин</div>
-        </div>
-        <p style="font-size: 1.8rem; color: #b5cd91; max-width: 700px;">Иммерсивный симулятор фабрики на инопланетном ландшафте. Добывай, строй, автоматизируй.</p>
+<div class="container">
+    <header>
+        <h1>Локальное хранилище</h1>
+        <p>Выберите директорию для работы</p>
+    </header>
 
-        <!-- Навигация (якоря) -->
-        <div class="nav-links">
-            <a href="#">ПУСК</a>
-            <a href="#">СТРОИТЕЛЬСТВО</a>
-            <a href="#">ИССЛЕДОВАНИЯ</a>
-            <a href="#">ТРАНСПОРТ</a>
-            <a href="#">FICSIT</a>
-        </div>
+    <div class="folder-grid">
+        
+        <!-- КАРТОЧКА: Чтобы открыть папку, пишите её имя в href -->
+        <a href="#sorter/" class="folder-card">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+            <span class="folder-name">#sorter</span>
+        </a>
 
-        <!-- Краткая вводная -->
-        <div class="quote-block">
-            «Добро пожаловать на Массейдж-2 (АБ). Ваша задача — превратить дикую природу в безупречную машину производства. FICSIT следит.»
-            <span>— Адаптационный буклет пионера</span>
-        </div>
+        <a href="4.2sdo/" class="folder-card">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+            <span class="folder-name">4.2sdo</span>
+        </a>
 
-        <!-- Что такое Satisfactory? -->
-        <h2>⚙️ ЧТО ЭТО ЗА ВСЕЛЕННАЯ?</h2>
-        <p style="font-size: 1.5rem; margin-bottom: 1.5rem;"><strong>Satisfactory</strong> — игра от Coffee Stain Studios (авторов Goat Simulator). Это открытый мир на планете Массейдж-2(АB), где вы — пионер корпорации FICSIT. Ваша цель: построить гигантскую фабрику с нуля, добывать ресурсы, изучать технологии и… ну, возможно, встретить местную фауну. Она не всегда рада.</p>
+        <a href="241-91/" class="folder-card">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+            <span class="folder-name">241-91</span>
+        </a>
 
-        <!-- Особенности (карточки) -->
-        <h2>📦 ОСОБЕННОСТИ ФАБРИКИ</h2>
-        <div class="feature-grid">
-            <div class="feature-card">
-                <div class="card-icon">🏭</div>
-                <h3>3D-строительство</h3>
-                <p>Фундаменты, стены, конвейеры, лифты — всё строится в любом месте и под любым углом. Вертикальное производство приветствуется!</p>
-            </div>
-            <div class="feature-card">
-                <div class="card-icon">🔄</div>
-                <h3>Автоматизация</h3>
-                <p>От руды до высокотехнологичных плат. Настройте логику, используйте разветвители и программируемые сплиттеры.</p>
-            </div>
-            <div class="feature-card">
-                <div class="card-icon">🚂</div>
-                <h3>Транспорт</h3>
-                <p>Конвейерные ленты, поезда, внедорожники, тракторы, а также картовозы и даже трубы для перемещения жидкостей.</p>
-            </div>
-            <div class="feature-card">
-                <div class="card-icon">🌍</div>
-                <h3>Исследование</h3>
-                <p>Огромный процедурно-ручной мир с пещерами, цветами, существами и артефактами. Изучайте технологии M.A.M.</p>
-            </div>
-        </div>
+        <a href="Calculator/" class="folder-card">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+            <span class="folder-name">Calculator</span>
+        </a>
 
-        <!-- Технические характеристики (specs как в игре) -->
-        <h2>⚡ ТЕХДАННЫЕ (актуальная версия)</h2>
-        <div class="specs-block">
-            <div class="spec-item">
-                <div class="value">1.0</div>
-                <div class="label">РЕЛИЗ</div>
-            </div>
-            <div class="spec-item">
-                <div class="value">>50</div>
-                <div class="label">ТИПОВ РЕСУРСОВ</div>
-            </div>
-            <div class="spec-item">
-                <div class="value">140+</div>
-                <div class="label">ПОСТРОЕК</div>
-            </div>
-            <div class="spec-item">
-                <div class="value">∞</div>
-                <div class="label">МАСШТАБИРОВАНИЕ</div>
-            </div>
-        </div>
+        <a href="FrameWork/" class="folder-card">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+            <span class="folder-name">FrameWork</span>
+        </a>
 
-        <!-- Абзац про мультиплеер и смысл -->
-        <div style="display: flex; gap: 2rem; flex-wrap: wrap; align-items: center; margin: 2rem 0;">
-            <div style="flex: 1; min-width: 250px;">
-                <h3 style="margin-top: 0;">👥 Кооператив до 4 игроков</h3>
-                <p style="font-size: 1.3rem;">Стройте общую фабрику с друзьями (или в одиночку, но FICSIT приветствует командную работу). Делите ресурсы, вместе прокладывайте конвейерные линии через горы.</p>
-            </div>
-            <div style="flex: 0 0 auto;">
-                <div class="button">НАЧАТЬ СБОРКУ</div>
-            </div>
-        </div>
+        <a href="HomeWork/" class="folder-card">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+            <span class="folder-name">HomeWork</span>
+        </a>
 
-        <!-- Раздел с деталями геймплея (как инструкция) -->
-        <h2>🧾 ПОЛНОЕ ОПИСАНИЕ</h2>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem 1rem; font-size: 1.2rem;">
-            <div style="background: #1f2b16; padding: 1.4rem; border-radius: 20px 2px 20px 2px;">
-                <strong style="color: #f5d742;">🔹 ДОБЫЧА:</strong> стройте шахты на узлах чистых, нормальных или богатых ресурсов. Подключайте питание.
-            </div>
-            <div style="background: #1f2b16; padding: 1.4rem; border-radius: 2px 20px 2px 20px;">
-                <strong style="color: #f5d742;">🔹 ПЕРЕРАБОТКА:</strong> плавильни,Foundry, химические заводы, сборщики. Создавайте сложные компоненты.
-            </div>
-            <div style="background: #1f2b16; padding: 1.4rem; border-radius: 2px 20px 2px 20px;">
-                <strong style="color: #f5d742;">🔹 ЭНЕРГИЯ:</strong> биомасса (ранняя игра), уголь, топливо, ядерная энергия. Следите за перегрузками!
-            </div>
-            <div style="background: #1f2b16; padding: 1.4rem; border-radius: 20px 2px 20px 2px;">
-                <strong style="color: #f5d742;">🔹 УДОБСТВА:</strong> "Калькулятор" конвейеров, зум-камера, режии планировки, чертежи (в U8+).
-            </div>
-        </div>
+        <a href="Lab1/" class="folder-card">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+            <span class="folder-name">Lab1</span>
+        </a>
 
-        <p style="margin: 2rem 0; font-family: 'Roboto Mono', monospace; background: #2b3b1e; padding: 1rem; border-radius: 8px;">
-        📍 Игровой процесс строится на постоянной оптимизации. Хотите производить 10 компьютеров в минуту? Будьте готовы протянуть сотни метров лент и настроить питание. Мир огромен, и каждый биом даёт уникальные ресурсы (кварц, сера, уран и даже кофеин для пионера!)   
-        </p>
+        <a href="Lab2/" class="folder-card">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+            <span class="folder-name">Lab2</span>
+        </a>
 
-        <!-- Цитата FICSIT -->
-        <div style="border: 2px dashed #9ba87b; padding: 1.5rem; text-align: center; font-size: 1.7rem; background: #1e2d13;">
-            ⚙️ "Не забывайте: природа — всего лишь неоптимизированная фабрика." ⚙️
-        </div>
+        <a href="Lab3/" class="folder-card">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+            <span class="folder-name">Lab3</span>
+        </a>
 
-        <!-- Подвал с копирайтом и версией -->
-        <footer>
-            <p>© 2024 FICSIT INC. Все права на эффективность защищены. <br> Сайт вдохновлён визуальным стилем Satisfactory. Игра доступна на ПК (ранний доступ и полноценный релиз 1.0 вышел в сентябре 2024).</p>
-            <p style="margin-top: 0.5rem;">⚡ собери свою идеальную фабрику ⚡</p>
-        </footer>
+        <a href="PHPt1/" class="folder-card">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+            <span class="folder-name">PHPt1</span>
+        </a>
+
+        <a href="Pinterest/" class="folder-card">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+            <span class="folder-name">Pinterest</span>
+        </a>
+
+        <a href="Practica/" class="folder-card">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+            <span class="folder-name">Practica</span>
+        </a>
+
+        <a href="Session/" class="folder-card">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+            <span class="folder-name">Session</span>
+        </a>
+
+        <a href="sss/" class="folder-card">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+            <span class="folder-name">sss</span>
+        </a>
+
+        <a href="Urav-Calc/" class="folder-card">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+            <span class="folder-name">Urav-Calc</span>
+        </a>
+
+
+        <!-- Добавьте свои папки по аналогии выше -->
+
     </div>
-    <!-- маленький декоративный элемент (мигающий огонёк как индикатор) -->
-    <div style="position: fixed; bottom: 10px; right: 20px; width: 15px; height: 15px; background: #90ee90; border-radius: 50%; box-shadow: 0 0 15px lightgreen; opacity: 0.6;"></div>
+</div>
+
 </body>
 </html>

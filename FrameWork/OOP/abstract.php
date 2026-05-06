@@ -1,8 +1,8 @@
 <?php
 
-    abstract class AbstractClass
+    abstract class AbstractClass//!<- абстрактный класс.
     {
-        abstract public function getValue();//!<- абстрактный класс.
+        abstract public function getValue();//<-абстрактная функция пишется так abstract * * *;
         public function printValue()
         {
             echo "Value ".$this->getValue();

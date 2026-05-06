@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Содержимое папки</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --accent: #38bdf8;
+            --text: #f1f5f9;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        /* Кнопка Назад */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 20px;
+            transition: 0.2s;
+        }
+        .back-button:hover { opacity: 0.8; transform: translateX(-5px); }
+
+        header {
+            border-bottom: 1px solid #334155;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+        }
+
+        .item {
+            background: var(--card);
+            padding: 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: white;
+            text-align: center;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .item:hover {
+            border-color: var(--accent);
+            background: #273549;
+            transform: scale(1.02);
+        }
+
+        .icon { font-size: 32px; display: block; margin-bottom: 10px; }
+        .name { font-size: 0.95rem; font-weight: 500; word-break: break-all; }
+        
+        /* Стиль для файлов (отличие от папок) */
+        .file { border-left: 4px solid #94a3b8; }
+        .folder { border-left: 4px solid var(--accent); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Ссылка на уровень выше -->
+    <a href="../index.html" class="back-button">← Назад в корень</a>
+
+    <header>
+        <h1>📁 Текущая директория</h1>
+        <p>Выберите файл или подпапку</p>
+    </header>
+
+    <div class="grid">
+        
+        <!-- ССЫЛКИ НА ПОДПАПКИ -->
+        <a href="" class="item folder">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+            <span class="name">Подпапка 1</span>
+        </a>
+
+        <!-- ССЫЛКИ НА ФАЙЛЫ -->
+        <a href="incapsule.php" class="item file" target="_blank">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            <span class="name">Incapsule.php</span>
+        </a>
+
+        <a href="nasledovanie.php" class="item file" target="_blank">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            <span class="name">nasledovanie.php</span>
+        </a>
+
+        <a href="interface.php" class="item file" target="_blank">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            <span class="name">interface.php</span>
+        </a>
+
+        <a href="abstract.php" class="item file" target="_blank">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            <span class="name">abstract.php</span>
+        </a>
+
+        <a href="polimorfizm.php" class="item file" target="_blank">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            <span class="name">polimorfizm.php</span>
+        </a>
+
+        <a href="Static_method.php" class="item file" target="_blank">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            <span class="name">Static_method.php</span>
+        </a>
+
+    </div>
+</div>
+
+</body>
+</html>

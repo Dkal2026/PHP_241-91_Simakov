@@ -16,7 +16,7 @@
         protected $homeWork;
         public function __construct($title, $text, $homeWork)
         {
-            parent::__construct($title, $text);
+            parent::__construct($title, $text);// :: <- обращение (к класу, к функции и т. д.)
             $this->homeWork = $homeWork;
         }
         public function getInfo()

@@ -5,7 +5,7 @@
         private $color;
         private $weight;
 
-        public function __construct($name, $color, $weight)
+        public function __construct($name, $color, $weight)// <- функция шаблон __construct()
         {
             $this->name = $name;
             $this->color = $color;
