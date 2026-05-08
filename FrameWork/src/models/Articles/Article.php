@@ -1,4 +1,8 @@
 <?php
+
+namespace src\models\Articles;
+use \src\models\Users\User;
+
     class Article
     {
         private $author;
