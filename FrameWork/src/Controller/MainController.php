@@ -1,17 +1,27 @@
 <?php
     namespace src\Controller;
+    use \src\Viev\Viev;
+    use \src\Servisec\db;
 
     class MainController
     {
+        private $viev;
+        private $db;
+
+        public  function __construct()
+        {
+            $this->viev = new Viev(dirname(dirname(__DIR__)).'/Templates');
+            $this->db = new db;
+        }
         public function Main()
         {
-            $path = dirname(dirname(__DIR__));
-            require $path.'/Templates/Main/main.php';
+            $articles = $this->db->query('SELECT * FROM `articles`');
+            $this->viev->renderHtml('Articles/article.php', ['articles'=>$articles]);
         }
 
         public function sayHello(string $name)
         {
-            echo "Hello, $name!";
+            $this->viev->renderHtml('Main/hello.php', ['name'=>$name]);
         }
     }
 ?>

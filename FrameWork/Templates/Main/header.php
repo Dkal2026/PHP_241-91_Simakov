@@ -1,4 +1,13 @@
-        :root {
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Navbar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<style>
+            :root {
             --nav-bg: rgba(255, 255, 255, 0.7);
             --accent: #6366f1;
             --text-dark: #0f172a;
@@ -23,16 +32,28 @@
         }
 
         /* Контейнер навигации */
-        .header {
+        /* .header{
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             padding: 20px;
             z-index: 1000;
-        }
+        } */
+        /*.main{
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding-top: 1000000px;
+            z-index: 1000;
+        }*/
 
         .navbar {
             width: 100%;
@@ -117,3 +138,74 @@
         .navbar:hover {
             border-color: rgba(99, 102, 241, 0.2);
         }
+
+        .article-table-container {
+        overflow-x: auto; /* Прокрутка на мобильных */
+        margin: 25px 0;
+    }
+
+    .article-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        min-width: 600px; /* Чтобы колонки не слипались */
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .article-table thead tr {
+        background-color: #009879;
+        color: #ffffff;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .article-table th,
+    .article-table td {
+        padding: 12px 15px;
+        border: 1px solid #dddddd;
+    }
+
+    .article-table tbody tr {
+        border-bottom: 1px solid #dddddd;
+    }
+
+    /* Чередование цветов строк */
+    .article-table tbody tr:nth-of-type(even) {
+        background-color: #f3f3f3;
+    }
+
+    /* Последняя строка с акцентом */
+    .article-table tbody tr:last-of-type {
+        border-bottom: 2px solid #009879;
+    }
+
+    /* Подсветка при наведении */
+    .article-table tbody tr:hover {
+        background-color: #f1f1f1;
+        cursor: default;
+    }
+</style>
+<body>
+
+    <header class="header">
+        <nav class="navbar">
+            <a href="#" class="logo">
+                <div class="logo-dot"></div>
+                Test<span style="color: var(--accent);">Lab</span>
+            </a>
+
+            <ul class="nav-menu">
+                <li><a href="\Simakov\FrameWork\www\index.php" class="nav-link active">Главная</a></li>
+                <li><a href="hello/vlad" class="nav-link">Hello.php</a></li>
+                <li><a href="#" class="nav-link">Кейсы</a></li>
+                <li><a href="#" class="nav-link">О компании</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="#" class="cta-button">Начать проект</a>
+            </div>
+
+
+        </nav>
+    </header>
+    <main>
