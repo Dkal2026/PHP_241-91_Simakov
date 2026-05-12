@@ -18,6 +18,12 @@
         {
             $sql = 'SELECT * FROM `articles` WHERE id=:id;';
             $article = $this->db->query($sql, ['id'=>$id]);
+            if($article == [])
+                {
+                    $this->viev->renderHtml('Errors/404.php', [], 404);
+                    return;
+                }
+                
             $sql = 'SELECT * FROM `users` WHERE id=:id;';
             $user = $this->db->query($sql, ['id'=>$article[0]['author_id']]);
             // var_dump($article);

@@ -10,8 +10,9 @@
             $this->templates = $templates;
         }
 
-        public function renderHtml(string $templatteName, $variable = [])
+        public function renderHtml(string $templatteName, $variable = [], $code = 200)
         {
+            http_response_code($code);
             extract($variable);
             include $this->templates.'/'.$templatteName;
         }
