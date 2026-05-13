@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Navbar</title>
+    <title><?=$title; ?></title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <style>
@@ -197,7 +197,7 @@
             <ul class="nav-menu">
                 <li><a href="\Simakov\FrameWork\www\index.php" class="nav-link active">Главная</a></li>
                 <li><a href="hello/vlad" class="nav-link">Hello.php</a></li>
-                <li><a href="#" class="nav-link">Кейсы</a></li>
+                <li><a href="bye/user" class="nav-link">bye.php</a></li>
                 <li><a href="#" class="nav-link">О компании</a></li>
             </ul>
 

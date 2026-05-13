@@ -10,7 +10,7 @@
             $this->templates = $templates;
         }
 
-        public function renderHtml(string $templatteName, $variable = [], $code = 200)
+        public function renderHtml(string $templatteName, $variable = [], $code = 200, $title = 'Мой блог')
         {
             http_response_code($code);
             extract($variable);

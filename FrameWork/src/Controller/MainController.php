@@ -21,7 +21,12 @@
 
         public function sayHello(string $name)
         {
-            $this->viev->renderHtml('Main/hello.php', ['name'=>$name]);
+            $this->viev->renderHtml('Main/hello.php', ['name'=>$name], 200, 'Страница приветствия');
+        }
+
+        public function sayBye(string $name)
+        {
+            $this->viev->renderHtml('Main/bye.php', ['name'=>$name], 200, 'Страница прощания');
         }
     }
 ?>
