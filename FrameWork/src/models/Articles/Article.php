@@ -2,6 +2,7 @@
 
 namespace src\models\Articles;
 use \src\models\Users\User;
+use src\models\Articles\Article;
 
     class Article
     {
@@ -39,6 +40,12 @@ use \src\models\Users\User;
         public function getAuthorId()
         {
             return $this->authorId;
+        }
+
+        public static function findAll() :array
+        {
+            $db = new db();
+            return db->query('SELECT * FROM `articles`;',[], Article::class);
         }
 
     }
