@@ -4,22 +4,22 @@
         <tr>
 
             <td>Id</td>
-            <td><?=$article['id'];?></td>
+            <td><?=$article->getId();?></td>
         </tr>
         <tr>
 
             <td>Title</td>
-            <td><?=$article['name'];?></td>
+            <td><?=$article->getName();?></td>
         </tr>
         <tr>
 
             <td>Text</td>
-            <td><?=$article['text'];?></td>
+            <td><?=$article->getText();?></td>
         </tr>
         <tr>
 
             <td>Author</td>
-            <td><?=$author['nickname'];?></td>
+            <td><?=$author->getNickname();?></td>
         </tr>
     </table>
 </div>

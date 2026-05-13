@@ -5,37 +5,40 @@ use \src\models\Users\User;
 
     class Article
     {
-        private $author;
-
-        public function __construct(private string $title, private string $text, User $author)
-        {
-            $this->author = $author;
-        }
         
-        public function setTitle(string $title)
+        private $id;
+        private $authorId;
+        private $name;
+        private $text;
+        private $createdAt;
+        
+        
+        public function __set($name, $value)
         {
-            $this->title = $title;
-        }
-        public function setText(string $text)
-        {
-            $this->text = $text;
-        }
-        public function setAuthor(User $author)
-        {
-            $this->author = $author;
+            $newProperty = $this->upperToCamel($name);
+            $this->$newProperty = $value;
         }
 
-        public function getTitle() :string
+        private function upperToCamel(string $name)
         {
-            return $this->title;
+            return lcfirst(str_replace('_', '', ucwords($name, '_')));
+        }
+
+        public function getName() :string
+        {
+            return $this->name;
+        }
+        public function getId() :string
+        {
+            return $this->id;
         }
         public function getText() :string
         {
             return $this->text;
         }
-        public function getAuthor() :User
+        public function getAuthorId()
         {
-            return $this->author;
+            return $this->authorId;
         }
 
     }

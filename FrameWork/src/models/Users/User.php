@@ -3,14 +3,30 @@
 namespace src\models\Users;
     class User
     {
-        public function __construct(private string $name){}
-        public function setName(string $name)
+        private $id;
+        private $nickname;
+        private $email;
+        private $isConfirmed;
+        private $role;
+        private $passwordHash;
+        private $authToken;
+        private $createdAt;
+
+
+        public function __set($name, $value)
         {
-            $this->name = $name;
+            $newProperty = $this->upperToCamel($name);
+            $this->$newProperty = $value;
         }
-        public function getName() :string
+
+        private function upperToCamel(string $name)
         {
-            return $this->name;
+            return lcfirst(str_replace('_', '', ucwords($name, '_')));
+        }
+
+        public function getNickname() :string
+        {
+            return $this->nickname;
         } 
     }
 ?>

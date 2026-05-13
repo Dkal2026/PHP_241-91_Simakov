@@ -20,7 +20,7 @@
                 <td><a href="article/<?=$article['id'];?>"><?=$article['name'];?></a></td>
                 <td><?=$article['text'];?></td>
                 <td><?=$article['author_id'];?></td>
-                <td><?php echo date('Y-m-d H:i:s');?></td>
+                <td><?php echo date('Y-m-d');?></td>
             </tr>
             <?php endforeach;?>
         </tbody>

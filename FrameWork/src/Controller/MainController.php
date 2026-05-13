@@ -2,7 +2,8 @@
     namespace src\Controller;
     use \src\Viev\Viev;
     use \src\Servisec\db;
-
+    use src\models\Articles\Article;
+    
     class MainController
     {
         private $viev;
@@ -15,7 +16,7 @@
         }
         public function Main()
         {
-            $articles = $this->db->query('SELECT * FROM `articles`');
+            $articles = $this->db->query('SELECT * FROM `articles`', [], Article::class);
             $this->viev->renderHtml('Articles/article.php', ['articles'=>$articles]);
         }
 
