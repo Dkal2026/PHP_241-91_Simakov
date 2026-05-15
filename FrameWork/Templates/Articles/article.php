@@ -16,10 +16,10 @@
         <tbody>
             <?php foreach($articles as $article):?>
             <tr>
-                <td><?=$article['id'];?></td>
-                <td><a href="article/<?=$article['id'];?>"><?=$article['name'];?></a></td>
-                <td><?=$article['text'];?></td>
-                <td><?=$article['author_id'];?></td>
+                <td><?=$article->getId();?></td>
+                <td><a href="article/<?=$article->getId();?>"><?=$article->getName();?></a></td>
+                <td><?=$article->getText();?></td>
+                <td><?=$article->getAuthorId()->getNickname();?></td>
                 <td><?php echo date('Y-m-d');?></td>
             </tr>
             <?php endforeach;?>

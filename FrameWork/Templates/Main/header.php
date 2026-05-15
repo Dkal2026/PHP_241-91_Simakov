@@ -184,6 +184,93 @@
         background-color: #f1f1f1;
         cursor: default;
     }
+    /* Группы полей ввода */
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #666666;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: sans-serif;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #333333;
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+/* Эффект при клике на поле */
+.form-group input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+}
+
+/* Чекбокс (Согласие) */
+.form-checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    cursor: pointer;
+    user-select: none;
+    font-family: sans-serif;
+}
+
+.form-checkbox input {
+    margin-right: 10px;
+    width: 16px;
+    height: 16px;
+    accent-color: #667eea;
+    cursor: pointer;
+}
+
+.form-checkbox span {
+    font-size: 13px;
+    color: #666666;
+}
+
+.form-checkbox a {
+    color: #667eea;
+    text-decoration: none;
+}
+
+.form-checkbox a:hover {
+    text-decoration: underline;
+}
+
+/* Кнопка отправки */
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: sans-serif;
+    cursor: pointer;
+    transition: transform 0.1s ease, opacity 0.3s ease;
+}
+
+.submit-btn:hover {
+    opacity: 0.95;
+}
+
+.submit-btn:active {
+    transform: scale(0.98);
+}
 </style>
 <body>
 
@@ -196,9 +283,9 @@
 
             <ul class="nav-menu">
                 <li><a href="\Simakov\FrameWork\www\index.php" class="nav-link active">Главная</a></li>
-                <li><a href="hello/vlad" class="nav-link">Hello.php</a></li>
-                <li><a href="bye/user" class="nav-link">bye.php</a></li>
-                <li><a href="#" class="nav-link">О компании</a></li>
+                <li><a href="../www/hello/vlad" class="nav-link">Hello.php</a></li>
+                <li><a href="../www/bye/user" class="nav-link">bye.php</a></li>
+                <li><a href="article/create" class="nav-link">Зарегистрироваться</a></li>
             </ul>
 
             <div class="nav-actions">

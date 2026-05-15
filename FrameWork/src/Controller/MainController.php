@@ -12,12 +12,13 @@
         public  function __construct()
         {
             $this->viev = new Viev(dirname(dirname(__DIR__)).'/Templates');
-            $this->db = new db;
         }
         public function Main()
         {
-            $articles = $this->db->query('SELECT * FROM `articles`', [], Article::class);
+            $articles = Article::findAll();
+            // var_dump($articles);
             $this->viev->renderHtml('Articles/article.php', ['articles'=>$articles]);
+            
         }
 
         public function sayHello(string $name)

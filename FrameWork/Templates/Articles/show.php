@@ -19,7 +19,7 @@
         <tr>
 
             <td>Author</td>
-            <td><?=$author->getNickname();?></td>
+            <td><?=$article->getAuthorId()->getNickname();?></td>
         </tr>
     </table>
 </div>

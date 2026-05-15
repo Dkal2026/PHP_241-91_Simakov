@@ -2,51 +2,36 @@
 
 namespace src\models\Articles;
 use \src\models\Users\User;
-use src\models\Articles\Article;
+use src\models\ActiveRecordEntity;
 
-    class Article
+    class Article extends ActiveRecordEntity
     {
-        
-        private $id;
-        private $authorId;
-        private $name;
-        private $text;
-        private $createdAt;
-        
-        
-        public function __set($name, $value)
-        {
-            $newProperty = $this->upperToCamel($name);
-            $this->$newProperty = $value;
-        }
-
-        private function upperToCamel(string $name)
-        {
-            return lcfirst(str_replace('_', '', ucwords($name, '_')));
-        }
+        protected $authorId;
+        protected $name;
+        protected $text;
+        protected $createdAt;
 
         public function getName() :string
         {
             return $this->name;
         }
-        public function getId() :string
-        {
-            return $this->id;
-        }
         public function getText() :string
         {
             return $this->text;
         }
-        public function getAuthorId()
+        public function getAuthorId() :User
         {
-            return $this->authorId;
+            return User::getById($this->authorId);
         }
 
-        public static function findAll() :array
+        protected static function getTableName()
         {
-            $db = new db();
-            return db->query('SELECT * FROM `articles`;',[], Article::class);
+            return 'articles';
         }
 
+        public function setAuthorId(User $user)
+        {
+            $this->authorId = $user->id;
+        }
     }
 ?>

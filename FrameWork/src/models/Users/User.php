@@ -1,32 +1,27 @@
 <?php
 
 namespace src\models\Users;
-    class User
+use src\models\ActiveRecordEntity;
+
+    class User extends ActiveRecordEntity
     {
-        private $id;
-        private $nickname;
-        private $email;
-        private $isConfirmed;
-        private $role;
-        private $passwordHash;
-        private $authToken;
-        private $createdAt;
-
-
-        public function __set($name, $value)
-        {
-            $newProperty = $this->upperToCamel($name);
-            $this->$newProperty = $value;
-        }
-
-        private function upperToCamel(string $name)
-        {
-            return lcfirst(str_replace('_', '', ucwords($name, '_')));
-        }
+        
+        protected $nickname;
+        protected $email;
+        protected $isConfirmed;
+        protected $role;
+        protected $passwordHash;
+        protected $authToken;
+        protected $createdAt;
 
         public function getNickname() :string
         {
             return $this->nickname;
         } 
+
+        protected static function getTableName()
+        {
+            return 'users';
+        }
     }
 ?>

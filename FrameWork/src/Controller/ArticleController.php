@@ -13,22 +13,32 @@
         public  function __construct()
         {
             $this->viev = new Viev(dirname(dirname(__DIR__)).'/Templates');
-            $this->db = new db;
         }
 
         public function show(int $id)
         {
-            $sql = 'SELECT * FROM `articles` WHERE id=:id;';
-            $article = $this->db->query($sql, ['id'=>$id], Article::class);
-            if($article == [])
+            $article = Article::getById($id);
+
+            if($article === null)
                 {
                     $this->viev->renderHtml('Errors/404.php', [], 404);
                     return;
                 }
-                
-            $sql = 'SELECT * FROM `users` WHERE id=:id;';
-            $user = $this->db->query($sql, ['id'=>$article->getAuthorId()], User::class);
-            $this->viev->renderHtml('Articles/show.php', ['article'=>$article,'author'=>$user]);
+            return $this->viev->renderHtml('Articles/show.php', ['article'=>$article]);
+        }
+
+        public function create()
+        {
+            return $this->viev->renderHtml('Articles/create.php');
+        }
+        public function store()
+        {
+            $user = User::getById(1);
+            $article = new Article;
+            $article->setAuthorId($user);
+            $article->name = $_POST['name'];
+            $article->text = $_POST['text'];
+            $article->save();
         }
     }
 ?>
