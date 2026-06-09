@@ -62,7 +62,7 @@
         {
             $mapProperty = $this->mapPropertiesToDbFormat();
             if($this->id == null) $this->store($mapProperty);
-            else $this->update();
+            else $this->update($mapProperty);
         }
 
         private function store(array $mapProperty)
@@ -86,9 +86,31 @@
             return $db->query($sql, $PropertyToValue, static::class);
             
         }
-        private function update()
+        private function update(array $mapProperty)
         {
+            $db = db::getInstance();
+            
+            $ColumnToParametr = [];
+            $ParamToValue = [];
+            foreach($mapProperty as $key=>$value)
+                {
+                    $Column = '`'.$key.'`';
+                    $param = ":$key";
+                    $ColumnToParametr[] = $Column.'='.$param;
+                    $ParamToValue[$key] = $value;
+                }
+                // print_r($ParamToValue);
+            $sql = 'UPDATE `'.static::getTableName().'` SET '.implode(',', $ColumnToParametr).'
+            WHERE `id`=:id';
+            // print_r($sql);
+            return $db->query($sql, $ParamToValue, static::class);
+        }
 
+        public function delete()
+        {
+            $db = db::getInstance();
+            $sql = 'DELETE FROM `'.static::getTableName().'` WHERE `id`=:id';
+            return $db->query($sql, [':id'=>$this->id], static::class);
         }
 
         

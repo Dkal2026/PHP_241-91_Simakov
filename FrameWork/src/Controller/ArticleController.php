@@ -31,6 +31,17 @@
         {
             return $this->viev->renderHtml('Articles/create.php');
         }
+        public function edit(int $id)
+        {
+            $article = Article::getById($id);
+
+            if($article === null)
+                {
+                    $this->viev->renderHtml('Errors/404.php', [], 404);
+                    return;
+                }
+            return $this->viev->renderHtml('Articles/update.php', ['article'=>$article]);
+        }
         public function store()
         {
             $user = User::getById(1);
@@ -40,6 +51,22 @@
             $article->text = $_POST['text'];
             $article->save();
             header("Location: http://localhost/Simakov/FrameWork/www/index.php");
+        }
+
+        public function update(int $id)
+        {
+            $article = Article::getById($id);
+            $article->name = $_POST['name'];
+            $article->text = $_POST['text'];
+            $article->save();
+            header("Location: http://localhost/Simakov/FrameWork/www/article/$id");
+        }
+
+        public function delete(int $id)
+        {
+            $article = Article::getById($id);
+            $article->delete();
+            header("Location: http://localhost/Simakov/FrameWork/www");
         }
     }
 ?>

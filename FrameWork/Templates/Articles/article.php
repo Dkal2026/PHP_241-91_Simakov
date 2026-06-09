@@ -11,6 +11,7 @@
                 <th><i class="fas fa-envelope"></i>text</th>
                 <th><i class="fas fa-phone"></i> Author</th>
                 <th><i class="fas fa-calendar"></i>Data</th>
+                <th><i class="fas fa-calendar"></i>Redact</th>
             </tr>
         </thead>
         <tbody>
@@ -21,6 +22,8 @@
                 <td><?=$article->getText();?></td>
                 <td><?=$article->getAuthorId()->getNickname();?></td>
                 <td><?php echo date('Y-m-d');?></td>
+                <td><a href="/Simakov/FrameWork/www/article/edit/<?=$article->getId();?>">Redact</a>/<a href="/Simakov/FrameWork/www/article/delete/<?=$article->getId();?>">Delete</a></td>
+                
             </tr>
             <?php endforeach;?>
         </tbody>

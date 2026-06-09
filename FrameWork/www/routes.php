@@ -6,6 +6,9 @@
         "~^$~" => [\src\Controller\MainController::class, 'Main'],
         "~article/(\d+)$~" => [\src\Controller\ArticleController::class, 'show'],
         "~^article/create$~" => [\src\Controller\ArticleController::class, 'create'],
+        "~^article/edit/(\d+)$~" => [\src\Controller\ArticleController::class, 'edit'],
+        "~^article/update/(\d+)$~" => [\src\Controller\ArticleController::class, 'update'],
+        "~^article/delete/(\d+)$~" => [\src\Controller\ArticleController::class, 'delete'],
         "~^article/store$~" => [\src\Controller\ArticleController::class, 'store'],
     ];
 
