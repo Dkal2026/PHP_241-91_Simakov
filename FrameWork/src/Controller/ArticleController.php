@@ -39,6 +39,7 @@
             $article->name = $_POST['name'];
             $article->text = $_POST['text'];
             $article->save();
+            header("Location: http://localhost/Simakov/FrameWork/www/index.php");
         }
     }
 ?>

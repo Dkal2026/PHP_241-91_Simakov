@@ -287,12 +287,6 @@
                 <li><a href="../www/bye/user" class="nav-link">bye.php</a></li>
                 <li><a href="article/create" class="nav-link">Зарегистрироваться</a></li>
             </ul>
-
-            <div class="nav-actions">
-                <a href="#" class="cta-button">Начать проект</a>
-            </div>
-
-
         </nav>
     </header>
     <main>

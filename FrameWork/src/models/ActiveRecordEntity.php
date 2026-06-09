@@ -30,8 +30,8 @@
                 $propertyNamedbFormat = $this->camelToCamel($propertyName);
                 $propertiseName[$propertyNamedbFormat] = $this->$propertyName;
             }
-            print_r($propertiseName);
-            return;
+            // print_r($propertiseName);
+            return $propertiseName;
         }
     
         public function __set($name, $value)
@@ -61,13 +61,30 @@
         public function save()
         {
             $mapProperty = $this->mapPropertiesToDbFormat();
-            if($this->id == null) $this->store();
+            if($this->id == null) $this->store($mapProperty);
             else $this->update();
         }
 
-        private function store()
+        private function store(array $mapProperty)
         {
-
+            $db = db::getInstance();
+            $mapProperty = array_filter($mapProperty);
+            $properties = [];
+            $values = [];
+            $PropertyToValue = [];
+            foreach($mapProperty as $key=>$value)
+                {
+                    $properties[] = '`'.$key.'`';
+                    $property = ":$key";
+                    $values[] = "$property";
+                    $PropertyToValue[$property] = $value;
+                }
+                // print_r($PropertyToValue);
+            $sql = 'INSERT INTO `'.static::getTableName().'`('.implode(',',$properties).') VALUES ('.implode(',',$values).')';
+            // print_r($sql);
+            print_r($PropertyToValue);
+            return $db->query($sql, $PropertyToValue, static::class);
+            
         }
         private function update()
         {

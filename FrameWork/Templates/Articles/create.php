@@ -2,11 +2,11 @@
 <form action="/Simakov/FrameWork/www/article/store" method="POST">
     <div class="form-group">
         <label for="name">Title</label>
-        <input type="text" id="name" name="name" placeholder="Иван Иванов" >
+        <input type="text" id="name" name="name">
     </div>
     <div class="form-group">
         <label for="text">Text</label>
-        <input type="text" id="text" name="text" placeholder="Минимум 8 символов">
+        <input type="text" id="text" name="text">
     </div>
 
     <button type="submit" class="submit-btn">Зарегистрироваться</button>
