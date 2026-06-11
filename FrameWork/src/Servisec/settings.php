@@ -1,6 +1,6 @@
 <?php
     return[
-        'host'=>'locadlhost',
+        'host'=>'localhost',
         'db'=>'basedata',
         'user'=>'root',
         'password'=>'',

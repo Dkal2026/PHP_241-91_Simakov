@@ -1,9 +1,10 @@
 <?php
     namespace src\Controller;
+    use \src\Exceptions\NotFoundExeption;
     use \src\Viev\Viev;
     use \src\Servisec\db;
-    use src\models\Articles\Article;
-    use src\models\Users\User;
+    use \src\models\Articles\Article;
+    use \src\models\Users\User;
 
     class ArticleController
     {
@@ -21,8 +22,7 @@
 
             if($article === null)
                 {
-                    $this->viev->renderHtml('Errors/404.php', [], 404);
-                    return;
+                    throw new NotFoundExeption;
                 }
             return $this->viev->renderHtml('Articles/show.php', ['article'=>$article]);
         }

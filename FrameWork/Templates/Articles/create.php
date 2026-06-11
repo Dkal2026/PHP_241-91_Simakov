@@ -9,6 +9,6 @@
         <input type="text" id="text" name="text">
     </div>
 
-    <button type="submit" class="submit-btn">Зарегистрироваться</button>
+    <button type="submit" class="submit-btn">Создать запись</button>
 </form>
 <?php require dirname(__DIR__).'/Main/footer.php';?>

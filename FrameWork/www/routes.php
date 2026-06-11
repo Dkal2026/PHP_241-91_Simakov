@@ -9,6 +9,7 @@
         "~^article/edit/(\d+)$~" => [\src\Controller\ArticleController::class, 'edit'],
         "~^article/update/(\d+)$~" => [\src\Controller\ArticleController::class, 'update'],
         "~^article/delete/(\d+)$~" => [\src\Controller\ArticleController::class, 'delete'],
+        "~^users/register$~" => [\src\Controller\UsersController::class, 'signUp'],
         "~^article/store$~" => [\src\Controller\ArticleController::class, 'store'],
     ];
 
