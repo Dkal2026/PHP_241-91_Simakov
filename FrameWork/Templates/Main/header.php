@@ -280,13 +280,15 @@
                 <div class="logo-dot"></div>
                 Test<span style="color: var(--accent);">Lab</span>
             </a>
-
             <ul class="nav-menu">
                 <li><a href="\Simakov\FrameWork\www\index.php" class="nav-link active">Главная</a></li>
                 <li><a href="../www/hello/vlad" class="nav-link">Hello.php</a></li>
                 <li><a href="../www/bye/user" class="nav-link">bye.php</a></li>
                 <li><a href="article/create" class="nav-link">Создать запись</a></li>
                 <li><a href="users/register" class="nav-link">Зарегестрироваться</a></li>
+                <li><a href="users/login" class="nav-link">Войти</a></li>
+                <li><a href="users/login" class="nav-link">Выйти</a></li>
+                <li><?=!empty($user) ? 'ПРивет '.$user->getNickname() : 'Войдите на сайт' ?></li>
             </ul>
         </nav>
     </header>

@@ -11,6 +11,8 @@
         "~^article/delete/(\d+)$~" => [\src\Controller\ArticleController::class, 'delete'],
         "~^users/register$~" => [\src\Controller\UsersController::class, 'signUp'],
         "~^article/store$~" => [\src\Controller\ArticleController::class, 'store'],
+        '~^users/login$~' => [\src\Controller\UsersController::class, 'login'],
+        '~^users/logout$~' => [\src\Controller\UsersController::class, 'logout'],
     ];
 
 ?>

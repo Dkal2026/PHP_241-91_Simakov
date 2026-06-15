@@ -25,7 +25,7 @@ use \src\Exceptions\InvalidArgumentException;
             return 'users';
         }
 
-        public static function signUp(array $userData)
+        public static function signUp(array $userData) :User
         {
             if (empty($userData['nickname'])) {
                 throw new InvalidArgumentException('Не передан nickname');
@@ -54,16 +54,57 @@ use \src\Exceptions\InvalidArgumentException;
             {
                 throw new InvalidArgumentException('Пользователь с таким email уже существует');
             }
+            if (static::findOneByColumn('nickname', $userData['nickname']) !== null)
+            {
+                throw new InvalidArgumentException('Пользователь с таким nickname уже существует');
+            }
+            if (static::findOneByColumn('email', $userData['email']) !== null)
+            {
+                throw new InvalidArgumentException('Пользователь с таким email уже существует');
+            }
             $user = new User();
             $user->nickname = $userData['nickname'];
             $user->email = $userData['email'];
             $user->passwordHash = password_hash($userData['password'], PASSWORD_DEFAULT);
-            $user->isConfirmed = false;
+            $user->isConfirmed = true;
             $user->role = 'user';
             $user->authToken = sha1(random_bytes(100)) . sha1(random_bytes(100));
             $user->save();
             return $user;
         }
+        public static function login(array $loginData): User
+        {
+            if (empty($loginData['email'])) {
+                throw new InvalidArgumentException('Не передан email');
+            }
+            if (empty($loginData['password'])) {
+                throw new InvalidArgumentException('Не передан password');
+            }
+            $user = User::findOneByColumn('email', $loginData['email']);
+            if ($user === null) {
+                throw new InvalidArgumentException('Нет пользователя с таким email');
+            }
+            if (!password_verify($loginData['password'], $user->getPasswordHash())) {
+                throw new InvalidArgumentException('Неправильный пароль');
+            }
+            if (!$user->isConfirmed) {
+                throw new InvalidArgumentException('Пользователь не подтверждён');
+            }
+            $user->refreshAuthToken();
+            $user->save();
+            return $user;
+        }
+        public function getPasswordHash()
+        {
+            return $this->passwordHash;
+        }
+        public function getAuthToken()
+        {
+            return $this->authToken;
+        }
+        private function refreshAuthToken()
+        {
+            $this->authToken = sha1(random_bytes(100)) . sha1(random_bytes(100));
+        }
     }
-
 ?>

@@ -4,18 +4,13 @@
     use \src\Viev\Viev;
     use \src\Servisec\db;
     use \src\models\Articles\Article;
+    use \src\models\Users\UsersAuthService;
     use \src\models\Users\User;
+    use \src\Controller\AbstractController;
 
-    class ArticleController
+    class ArticleController extends AbstractController
     {
-        private $viev;
         private $db;
-
-        public  function __construct()
-        {
-            $this->viev = new Viev(dirname(dirname(__DIR__)).'/Templates');
-        }
-
         public function show(int $id)
         {
             $article = Article::getById($id);

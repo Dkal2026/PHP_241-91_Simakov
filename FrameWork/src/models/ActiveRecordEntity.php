@@ -82,7 +82,7 @@
                 // print_r($PropertyToValue);
             $sql = 'INSERT INTO `'.static::getTableName().'`('.implode(',',$properties).') VALUES ('.implode(',',$values).')';
             // print_r($sql);
-            print_r($PropertyToValue);
+            // print_r($PropertyToValue);
             return $db->query($sql, $PropertyToValue, static::class);
             
         }
@@ -117,11 +117,12 @@
         {
             $db = Db::getInstance();
             $result = $db->query(
-               'SELECT * FROM `' . static::getTableName() . '` WHERE `' . $columnName . '` = :value LIMIT 1;',
+                'SELECT * FROM `' . static::getTableName() . '` WHERE `' . $columnName . '` = :value LIMIT 1;',
                 [':value' => $value],
                 static::class
             );
-            if ($result === []) {
+            if ($result === [])
+            {
                 return null;
             }
             return $result[0];

@@ -2,23 +2,17 @@
     namespace src\Controller;
     use \src\Viev\Viev;
     use \src\Servisec\db;
+    use \src\models\Users\UsersAuthService;
     use src\models\Articles\Article;
+    use \src\Controller\AbstractController;
     
-    class MainController
+    class MainController extends AbstractController
     {
-        private $viev;
         private $db;
-
-        public  function __construct()
-        {
-            $this->viev = new Viev(dirname(dirname(__DIR__)).'/Templates');
-        }
-        public function Main()
+        public function main()
         {
             $articles = Article::findAll();
-            // var_dump($articles);
             $this->viev->renderHtml('Articles/article.php', ['articles'=>$articles]);
-            
         }
 
         public function sayHello(string $name)
