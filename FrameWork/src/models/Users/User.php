@@ -80,7 +80,7 @@ use \src\Exceptions\InvalidArgumentException;
             if (empty($loginData['password'])) {
                 throw new InvalidArgumentException('Не передан password');
             }
-            $user = User::findOneByColumn('email', $loginData['email']);
+            $user = User::findOneByColumn('email', $loginData['email'])[0];
             if ($user === null) {
                 throw new InvalidArgumentException('Нет пользователя с таким email');
             }

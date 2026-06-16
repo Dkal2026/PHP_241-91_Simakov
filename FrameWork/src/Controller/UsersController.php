@@ -1,8 +1,8 @@
 <?php
     namespace src\Controller;
     use \src\models\Users\User;
-    use src\Viev\Viev;
-    use src\Exceptions\InvalidArgumentException;
+    use \src\Viev\Viev;
+    use \src\Exceptions\InvalidArgumentException;
     use \src\models\Users\UsersAuthService;
     use \src\Controller\AbstractController;
 
@@ -39,6 +39,7 @@
                 {
                     $user = User::login($_POST);
                     UsersAuthService::createToken($user);
+                    // print_r($user);
                     header('Location: http://localhost/Simakov/FrameWork/www');
                     exit();
                 }
@@ -51,10 +52,13 @@
             
             $this->viev->renderHtml('users/login.php');
         }
+
         public function logout()
         {
-            session_reset();
-            setcookie("token", "", time() - 3600);
+            // session_reset();
+            setcookie("token", "", time() - 3600, '/', '', false, true);
+            header('Location: /Simakov/FrameWork/www/users/login');
+            exit();
         }
     }
 ?>

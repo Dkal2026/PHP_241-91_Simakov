@@ -11,18 +11,18 @@
                 <th><i class="fas fa-envelope"></i>text</th>
                 <th><i class="fas fa-phone"></i> Author</th>
                 <th><i class="fas fa-calendar"></i>Data</th>
-                <th><i class="fas fa-calendar"></i>Redact</th>
+                <th><i class="fas fa-calendar"></i>Redact/Delete</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach($articles as $article):?>
             <tr>
                 <td><?=$article->getId();?></td>
-                <td><a href="article/<?=$article->getId();?>"><?=$article->getName();?></a></td>
+                <td><a class="my-button dancing-script-uniquifier" href="article/<?=$article->getId();?>"><?=$article->getName();?></a></td>
                 <td><?=$article->getText();?></td>
                 <td><?=$article->getAuthorId()->getNickname();?></td>
                 <td><?php echo date('Y-m-d');?></td>
-                <td><a href="/Simakov/FrameWork/www/article/edit/<?=$article->getId();?>">Redact</a>/<a href="/Simakov/FrameWork/www/article/delete/<?=$article->getId();?>">Delete</a></td>
+                <td><a class="my-button dancing-script-uniquifier" href="/Simakov/FrameWork/www/article/edit/<?=$article->getId();?>">Redact</a>/<a class="my-button dancing-script-uniquifier" href="/Simakov/FrameWork/www/article/delete/<?=$article->getId();?>">Delete</a></td>
                 
             </tr>
             <?php endforeach;?>

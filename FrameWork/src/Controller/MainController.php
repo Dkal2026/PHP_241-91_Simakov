@@ -3,7 +3,7 @@
     use \src\Viev\Viev;
     use \src\Servisec\db;
     use \src\models\Users\UsersAuthService;
-    use src\models\Articles\Article;
+    use \src\models\Articles\Article;
     use \src\Controller\AbstractController;
     
     class MainController extends AbstractController

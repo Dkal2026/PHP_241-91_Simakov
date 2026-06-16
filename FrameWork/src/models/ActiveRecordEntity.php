@@ -113,11 +113,11 @@
             return $db->query($sql, [':id'=>$this->id], static::class);
         }
 
-        public static function findOneByColumn(string $columnName, $value): ?self
+        public static function findOneByColumn(string $columnName, $value): ?array
         {
             $db = Db::getInstance();
             $result = $db->query(
-                'SELECT * FROM `' . static::getTableName() . '` WHERE `' . $columnName . '` = :value LIMIT 1;',
+                'SELECT * FROM `' . static::getTableName() . '` WHERE `' . $columnName . '` = :value;',
                 [':value' => $value],
                 static::class
             );
@@ -125,7 +125,7 @@
             {
                 return null;
             }
-            return $result[0];
+            return $result;
         }
         
     }

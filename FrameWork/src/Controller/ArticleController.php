@@ -7,6 +7,7 @@
     use \src\models\Users\UsersAuthService;
     use \src\models\Users\User;
     use \src\Controller\AbstractController;
+    use \src\models\Comments\Comment;
 
     class ArticleController extends AbstractController
     {
@@ -14,12 +15,14 @@
         public function show(int $id)
         {
             $article = Article::getById($id);
+            $comments = Comment::findOneByColumn('article_id', $id);
+            // var_dump($comments);
 
             if($article === null)
                 {
                     throw new NotFoundExeption;
                 }
-            return $this->viev->renderHtml('Articles/show.php', ['article'=>$article]);
+            return $this->viev->renderHtml('Articles/show.php', ['article'=>$article, 'comments'=>$comments]);
         }
 
         public function create()
