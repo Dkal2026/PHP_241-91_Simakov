@@ -27,7 +27,7 @@
         <div class="form-group">
             <label for="comment-text">Оставить комментарий</label>
             <!-- Вместо обычного input лучше использовать textarea для длинных текстов -->
-            <input type="text" id="comment-text" name="comment" placeholder="Напишите, что вы думаете...">
+            <input type="text" id="comment-text" name="comment" placeholder="Напишите, что вы думаете..." required>
             <input type="hidden" name="getId" value="<?=$article->getId();?>">
         </div>
 

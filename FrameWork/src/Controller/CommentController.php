@@ -15,6 +15,7 @@
         public function store()
         {
             $comment = new Comment;
+            // var_dump($user);
             $comment->setUserId($this->user);
             $comment->articleId = $_POST['getId'];
             $comment->text = $_POST['comment'];
@@ -26,7 +27,20 @@
         {
             $comment = Comment::getById($id);
             $comment->delete();
-            header("Location: http://localhost/Simakov/FrameWork/www/article/".$comment->getArticleId);
+            // echo $comment->getArticleId();
+            header("Location: http://localhost/Simakov/FrameWork/www/article/".$comment->getArticleId());
+        }
+
+        public function edit(int $id)
+        {
+            $comment = Comment::getById($id);
+
+            if($comment === null)
+                {
+                    $this->viev->renderHtml('Errors/404.php', [], 404);
+                    return;
+                }
+            return $this->viev->renderHtml('comments/update.php', ['comment'=>$comment]);
         }
 
         public function update(int $id)
@@ -34,7 +48,7 @@
             $comment = Comment::getById($id);
             $comment->text = $_POST['text'];
             $comment->save();
-            header("Location: http://localhost/Simakov/FrameWork/www/article/".$_POST['getId']);
+            header("Location: http://localhost/Simakov/FrameWork/www/article/".$comment->getArticleId());
         }
 
     }

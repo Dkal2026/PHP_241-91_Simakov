@@ -1,7 +1,7 @@
 <?php
     namespace src\Models\Comments;
     use \src\models\Users\User;
-    use src\models\ActiveRecordEntity;
+    use \src\models\ActiveRecordEntity;
 
     class Comment extends ActiveRecordEntity
     {
@@ -26,7 +26,7 @@
 
         public function getArticleId()
         {
-            return $articleId;
+            return $this->articleId;
         }
         
     }

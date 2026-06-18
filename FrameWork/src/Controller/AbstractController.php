@@ -9,6 +9,7 @@
     {
         protected $viev;
         protected $user;
+        
         public function __construct()
         {
             $this->user = UsersAuthService::getUserByToken();
